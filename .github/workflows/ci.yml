@@ -16,11 +16,17 @@ jobs:
       - name: Build Docker images
         run: docker compose build
 
+      - name: Start DB
+        run: docker compose up -d db
+
+      - name: Wait for DB
+        run: |
+          until docker compose exec -T db pg_isready -U postgres; do
+            sleep 2
+          done
+
       - name: Check containers
         run: docker ps
-
-      - name: Run logs
-        run: docker compose logs
 
       - name: Run monitor
         run: docker compose run --rm app python monitor.py
