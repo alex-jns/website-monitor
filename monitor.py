@@ -4,6 +4,9 @@ import time
 # Imports the function from database.py
 from database import save_result
 
+# Imports the function from alerts.py
+from alerts import send_alert
+
 # Array of websites to iterate over
 URLS = [
     "https://google.com",
@@ -53,8 +56,12 @@ def run():
         # Result of check_site function (Python dictionary)
         result = check_site(url)
 
-        # Print result
-        print(result)
+        # Save results to the database
+        save_result(result)
+
+        # Send alert is necessary
+        if result["status"] == "down":
+            send_alert(result)
 
 # Python entry point check
 if __name__ == "__main__":
