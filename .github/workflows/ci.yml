@@ -13,23 +13,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Create .env file
+        run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+
       - name: Build Docker images
         run: docker compose build
-
-      - name: Set env
-        run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
 
       - name: Start services
         run: docker compose up -d
 
-      - name: Wait a bit for DB
+      - name: Wait for DB
         run: sleep 10
 
-      - name: Check running containers
+      - name: Check containers
         run: docker ps
 
-      - name: Run logs (debug)
+      - name: Run logs
         run: docker compose logs
 
-      - name: Run monitor once
+      - name: Run monitor
         run: docker compose exec -T app python monitor.py
