@@ -60,8 +60,8 @@ def run():
         save_result(result)
 
         # Send alert is necessary
-        if result["status"] == "down":
-            send_alert(result)
+        #if result["status"] == "down":
+        #    send_alert(result)
 
 # Python entry point check
 if __name__ == "__main__":
