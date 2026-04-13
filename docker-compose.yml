@@ -17,6 +17,8 @@ services:
 
   app:
     build: .
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
     depends_on:
       db:
         condition: service_healthy
