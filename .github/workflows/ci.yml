@@ -25,6 +25,9 @@ jobs:
       - name: Run logs
         run: docker compose logs
 
+      - name: Run monitor
+        run: docker compose run --rm app python monitor.py
+
       - name: Check database contents
         run: |
           docker compose exec -T db psql -U postgres -d monitor -c "SELECT * FROM checks;"
