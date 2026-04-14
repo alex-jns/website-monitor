@@ -1,20 +1,32 @@
+# Defines the containers for this application: db and app
 services:
+  # Represents the PostgreSQL container
   db:
+    # Uses the latest version of postgres
     image: postgres
+
+    # Maps container port 5432 to host port 5432 (local)
     ports:
       - "5432:5432"
+
+    # Specifies variables for postgres on startup
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: monitor
+
+    # Ensures the DB is ready before services use it
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 10
+
+    # Creates the 'checks' table in the monitor database; see init.sql
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
+  # Represents the Python website monitoring script
   app:
     build: .
     environment:

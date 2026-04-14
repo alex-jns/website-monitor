@@ -1,36 +1,45 @@
+# Name of the GitHub Actions workflow
 name: CI
 
+# Runs whenever code is pushed to main
 on:
   push:
     branches: [main]
 
+# Defines a job called build-ant-test that runs on the latest version of ubuntu
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
+      # Download the repository into the runner
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Build Docker images using docker-compose.yml
       - name: Build Docker images
         run: docker compose build
 
+      # Starts only the database container as daemon
       - name: Start DB
         run: docker compose up -d db
 
+      # Wait until PostgreSQL is ready
       - name: Wait for DB
         run: |
           until docker compose exec -T db pg_isready -U postgres; do
             sleep 2
           done
 
+      # Show running containers for debugging
       - name: Check containers
         run: docker ps
 
+      # Run the Python monitor script
       - name: Run monitor
         run: docker compose run --rm app python monitor.py
 
+      # Query database to verify records were inserted
       - name: Check database contents
         run: |
           docker compose exec -T db psql -U postgres -d monitor -c "SELECT * FROM checks;"
