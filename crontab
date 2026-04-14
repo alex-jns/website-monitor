@@ -1,0 +1,2 @@
+# Run monitor.py every minute
+* * * * * /usr/local/bin/python3 /app/monitor.py >> /var/log/cron.log 2>&1

@@ -23,6 +23,7 @@ def check_site(url):
     start = time.time()
 
     try:
+        print("Sent a HTTP request...")
         
         # Send an HTTP request to the website; waits 5 seconds before failing
         response = requests.get(url, timeout=5)
@@ -33,12 +34,25 @@ def check_site(url):
         # Status code 200 represents a successful connection
         status = "up" if response.status_code == 200 else "down"
 
+        print(f"Received status: {status}")
+
         # Python dictionary
         return {
             "url": url,
             "status": status,
             "status_code": response.status_code,
             "latency": latency
+        }
+    
+    # Catches timeout exceptions
+    except requests.exceptions.Timeout as e:
+        print("Error: Request timed out")
+
+        return {
+            "url": url,
+            "status": "down",
+            "error": str(e),
+            "latency": None
         }
     
     # General error catch; e is the error message
@@ -52,9 +66,11 @@ def check_site(url):
 
 # Main monitoring loop
 def run():
+    print("Started the monitoring script.")
 
     # Iterate over the array
     for url in URLS:
+        print(f"Monitoring: {url}")
 
         # Result of check_site function (Python dictionary)
         result = check_site(url)

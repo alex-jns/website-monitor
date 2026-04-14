@@ -6,7 +6,10 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 # Connect to the PostgreSQL database
 def get_conn():
-    return psycopg2.connect(DATABASE_URL)
+    url = os.getenv("DATABASE_URL")
+    if not url:
+        raise ValueError("DATABASE_URL is not set")
+    return psycopg2.connect(url)
 
 # Save results from website query into database
 def save_result(result):
