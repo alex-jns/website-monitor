@@ -18,7 +18,7 @@ Queries a list of websites and stores them in a PostgreSQL database. Includes va
  
 ## Requirements
 
-- To be determined
+To be determined
 
 ## Quick Start
 
