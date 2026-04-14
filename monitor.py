@@ -9,8 +9,11 @@ from alerts import send_alert
 
 # Array of websites to iterate over
 URLS = [
-    "https://google.com",
-    "https://x.com"
+    "https://httpbin.org/status/200",
+    "https://httpbin.org/status/404",
+    "https://httpbin.org/status/500",
+    "https://httpbin.org/delay/3",
+    "https://httpbin.org/delay/10"
 ]
 
 # Monitors the websites and returns information
