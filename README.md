@@ -6,6 +6,7 @@ Queries a list of websites and stores them in a PostgreSQL database. Includes va
 
 # Features
 
+- Triggers via cron scheduling.
 - Runs a website monitoring Python script.
 - Saves information to a PostgreSQL database.
 - Containerized in a Docker image.
@@ -13,7 +14,6 @@ Queries a list of websites and stores them in a PostgreSQL database. Includes va
 
 ## Todo
 
-- Triggers via cron scheduling.
 - Sends E-Mail alerts if websites are down.
  
 ## Requirements
