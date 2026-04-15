@@ -51,11 +51,10 @@ jobs:
       - name: Run monitor
         run: docker compose run --rm app python monitor.py
         env:
-          # Use default credentials for testing
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: monitor
-          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
+          # Use dummy values for testing
+          EMAIL_RECIPIENT: test@example.com
+          EMAIL_SENDER: test@example.com
+          EMAIL_PASS: fake_password_123
 
       # Query database to verify records were inserted
       - name: Check database contents
@@ -63,6 +62,7 @@ jobs:
           docker compose exec -T db psql -U postgres -d monitor -c "SELECT * FROM checks;"
         env:
           # Use default credentials for testing
-          EMAIL_RECIPIENT: test@example.com
-          EMAIL_SENDER: test@example.com
-          EMAIL_PASS: fake_password_123
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: monitor
+          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
