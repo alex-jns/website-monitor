@@ -67,4 +67,26 @@ docker run --env-file .env site-monitor
 
 ## Usage
 
-To be determined
+Once the project is running, it will query a list of websites once per minute.
+
+### Change sites to be monitored
+
+The sites that are monitored are located in an array named URLS in monitor.py:
+
+```
+URLS = [
+    "https://httpbin.org/status/200",
+    "https://httpbin.org/status/404",
+    "https://httpbin.org/status/500",
+    "https://httpbin.org/delay/3",
+    "https://httpbin.org/delay/10"
+]
+```
+
+### Change frequency of monitoring
+
+The monitoring script is trigger by the crontab file:
+
+```
+* * * * * /usr/local/bin/python3 /app/monitor.py >> /var/log/cron.log 2>&1
+```
