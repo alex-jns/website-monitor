@@ -55,6 +55,11 @@ jobs:
           EMAIL_RECIPIENT: test@example.com
           EMAIL_SENDER: test@example.com
           EMAIL_PASS: fake_password_123
+          # Use default credentials for testing
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: monitor
+          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
 
       # Query database to verify records were inserted
       - name: Check database contents
