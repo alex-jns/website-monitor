@@ -64,7 +64,7 @@ docker compose up --build
 
 ## Usage
 
-Once the project is running, it will query a list of websites once per minute. Websites that are down (returns a bad HTTP status code, or times out after 5 seconds) it will send an email through Gmail SMTP using TLS if the environment was set up correctly. 
+Once the project is running, it will query a list of websites every 5 minutes. Websites that are down (returns a bad HTTP status code, or times out after 5 seconds) it will send an email through Gmail SMTP using TLS if the environment was set up correctly. 
 
 ### Change sites to be monitored
 
@@ -85,7 +85,7 @@ URLS = [
 The monitoring script is trigger by the crontab file:
 
 ```
-* * * * * /usr/local/bin/python3 /app/monitor.py >> /var/log/cron.log 2>&1
+*/5 * * * * /usr/local/bin/python3 /app/monitor.py >> /var/log/cron.log 2>&1
 ```
 
 ### Query the database
