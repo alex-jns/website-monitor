@@ -36,6 +36,12 @@ jobs:
           until docker compose exec -T db pg_isready -U postgres; do
             sleep 2
           done
+        env:
+          # Use default credentials for testing
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: monitor
+          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
 
       # Show running containers for debugging
       - name: Check containers
@@ -55,3 +61,9 @@ jobs:
       - name: Check database contents
         run: |
           docker compose exec -T db psql -U postgres -d monitor -c "SELECT * FROM checks;"
+        env:
+          # Use default credentials for testing
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: monitor
+          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
