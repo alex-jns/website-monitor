@@ -30,8 +30,8 @@ Queries a list of websites and stores them in a PostgreSQL database. Includes va
 Pull the project files from GitHub using the command:
 
 ```
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/alex-jns/website-monitor.git
+cd website-monitor
 ```
 
 ### Set up environment
@@ -39,7 +39,7 @@ cd your-repo-name
 This project uses a .env file to manage secrets. Create a .env file in the root directory and add the following:
 
 ```
-EMAIL_USER=your-email@gmail.com
+EMAIL_SENDER=your-email@gmail.com
 EMAIL_PASS=your-app-password-here
 ```
 
