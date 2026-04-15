@@ -11,10 +11,9 @@ env:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   POSTGRES_DB: monitor
-  DATABASE_URL:
-    postgresql://postgres:postgres@db:5432/monitor
+  DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
 
-    # Use dummy values for testing
+  # Use dummy values for testing
   EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
   EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
   EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
