@@ -1,12 +1,8 @@
-# Website Monitoring & Alert System (WIP)
+# Website Monitoring & Alert System
 
 A containerized website monitoring and alerting system using Python, PostgreSQL, cron scheduling, and GitHub Actions CI/CD.
 
 Queries a list of websites and stores them in a PostgreSQL database. Includes values such as HTTP status codes, up/down status, and latency. Runs in a Docker container, and validated through GitHub Actions CI testing.
-
-## Todo
-
-- Polish README and release
 
 # Features
 
@@ -35,14 +31,30 @@ git clone https://github.com/alex-jns/website-monitor.git
 cd website-monitor
 ```
 
-### (Optional) Set up environment
+## Set up the environment
+
+This project uses a .env file to manage secrets. Create a .env file in the root directory.
+
+If you do not want the default PostgreSQL login credentials, change them here:
+
+```
+DATABASE_URL=postgresql://postgres:postgres@db:5432/monitor
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=monitor
+```
+
+If you want to use the default login credentials, copy this code into your .env file.
+
+### (Optional) Set up email alerts
 
 This step is optional if you want to receive email alerts if a website down.
 
-This project uses a .env file to manage secrets. Create a .env file in the root directory and add the following:
+Add the following lines to your .env file:
 
 ```
-EMAIL_SENDER=your-email@gmail.com
+EMAIL_RECIPIENT=recipient-email@gmail.com
+EMAIL_SENDER=sender-email@gmail.com
 EMAIL_PASS=your-app-password-here
 ```
 
@@ -109,3 +121,7 @@ If you want to stop the Docker containers:
 ```
 docker compose down
 ```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
