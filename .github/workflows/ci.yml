@@ -52,9 +52,9 @@ jobs:
         run: docker compose run --rm app python monitor.py
         env:
           # Use dummy values for testing
-          EMAIL_RECIPIENT: test@example.com
-          EMAIL_SENDER: test@example.com
-          EMAIL_PASS: fake_password_123
+          EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
+          EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
           # Use default credentials for testing
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
