@@ -23,6 +23,12 @@ jobs:
       # Starts only the database container as daemon
       - name: Start DB
         run: docker compose up -d db
+        env:
+          # Use default credentials for testing
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: monitor
+          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
 
       # Wait until PostgreSQL is ready
       - name: Wait for DB
