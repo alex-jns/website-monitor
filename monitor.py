@@ -23,8 +23,6 @@ def check_site(url):
     start = time.time()
 
     try:
-        print("Sent a HTTP request...")
-        
         # Send an HTTP request to the website; waits 5 seconds before failing
         response = requests.get(url, timeout=5)
 
@@ -33,8 +31,6 @@ def check_site(url):
 
         # Status code 200 represents a successful connection
         status = "up" if response.status_code == 200 else "down"
-
-        print(f"Received status: {status}")
 
         # Python dictionary
         return {
@@ -79,8 +75,8 @@ def run():
         save_result(result)
 
         # Send alert is necessary
-        #if result["status"] == "down":
-        #    send_alert(result)
+        if result["status"] == "down":
+            send_alert(result)
 
 # Python entry point check
 if __name__ == "__main__":
