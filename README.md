@@ -1,12 +1,8 @@
-# Website Monitoring & Alert System (WIP)
+# Website Monitoring & Alert System
 
 A containerized website monitoring and alerting system using Python, PostgreSQL, cron scheduling, and GitHub Actions CI/CD.
 
 Queries a list of websites and stores them in a PostgreSQL database. Includes values such as HTTP status codes, up/down status, and latency. Runs in a Docker container, and validated through GitHub Actions CI testing.
-
-## Todo
-
-- Polish README and release
 
 # Features
 
@@ -125,3 +121,7 @@ If you want to stop the Docker containers:
 ```
 docker compose down
 ```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
