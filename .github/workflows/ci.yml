@@ -6,6 +6,19 @@ on:
   push:
     branches: [main]
 
+env:
+  # Use default credentials for testing
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_DB: monitor
+  DATABASE_URL:
+    postgresql://postgres:postgres@db:5432/monitor
+
+    # Use dummy values for testing
+  EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
+  EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+  EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+
 # Defines a job called build-ant-test that runs on the latest version of ubuntu
 jobs:
   build-and-test:
@@ -23,12 +36,6 @@ jobs:
       # Starts only the database container as daemon
       - name: Start DB
         run: docker compose up -d db
-        env:
-          # Use default credentials for testing
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: monitor
-          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
 
       # Wait until PostgreSQL is ready
       - name: Wait for DB
@@ -36,12 +43,6 @@ jobs:
           until docker compose exec -T db pg_isready -U postgres; do
             sleep 2
           done
-        env:
-          # Use default credentials for testing
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: monitor
-          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
 
       # Show running containers for debugging
       - name: Check containers
@@ -50,24 +51,8 @@ jobs:
       # Run the Python monitor script
       - name: Run monitor
         run: docker compose run --rm app python monitor.py
-        env:
-          # Use dummy values for testing
-          EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
-          EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
-          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-          # Use default credentials for testing
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: monitor
-          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
 
       # Query database to verify records were inserted
       - name: Check database contents
         run: |
           docker compose exec -T db psql -U postgres -d monitor -c "SELECT * FROM checks;"
-        env:
-          # Use default credentials for testing
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: monitor
-          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
