@@ -44,6 +44,12 @@ jobs:
       # Run the Python monitor script
       - name: Run monitor
         run: docker compose run --rm app python monitor.py
+        env:
+          # Use default credentials for testing
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: monitor
+          DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
 
       # Query database to verify records were inserted
       - name: Check database contents
