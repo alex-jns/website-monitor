@@ -14,6 +14,9 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      EMAIL_RECIPIENT: ${EMAIL_RECIPIENT}
+      EMAIL_SENDER: ${EMAIL_SENDER}
+      EMAIL_PASS: ${EMAIL_PASS}
 
     # Ensures the DB is ready before services use it
     healthcheck:
