@@ -34,7 +34,7 @@ git clone https://github.com/alex-jns/website-monitor.git
 cd website-monitor
 ```
 
-### Set up environment
+### (Optional) Set up environment
 
 This project uses a .env file to manage secrets. Create a .env file in the root directory and add the following:
 
@@ -42,6 +42,8 @@ This project uses a .env file to manage secrets. Create a .env file in the root 
 EMAIL_SENDER=your-email@gmail.com
 EMAIL_PASS=your-app-password-here
 ```
+
+This step is optional if you want to receive email alerts if a website down.
 
 ### Install dependencies
 
