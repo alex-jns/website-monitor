@@ -35,14 +35,28 @@ git clone https://github.com/alex-jns/website-monitor.git
 cd website-monitor
 ```
 
-### (Optional) Set up environment
+## Set up the environment
 
-This step is optional if you want to receive email alerts if a website down.
+This project uses a .env file to manage secrets. Create a .env file in the root directory.
 
-This project uses a .env file to manage secrets. Create a .env file in the root directory and add the following:
+If you do not want the default PostgreSQL login credentials, change them here:
 
 ```
-EMAIL_SENDER=your-email@gmail.com
+DATABASE_URL=postgresql://postgres:postgres@db:5432/monitor
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=monitor
+```
+
+If you want to use the default login credentials, copy this code into your .env file.
+
+### (Optional) Set up email alerts
+
+This step is optional if you want to receive email alerts if a website down:
+
+```
+EMAIL_RECIPIENT=recipient-email@gmail.com
+EMAIL_SENDER=sender-email@gmail.com
 EMAIL_PASS=your-app-password-here
 ```
 
