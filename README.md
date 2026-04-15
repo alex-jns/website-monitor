@@ -19,7 +19,8 @@ Queries a list of websites and stores them in a PostgreSQL database. Includes va
  
 ## Requirements
 
-- Python 3.9+ or Docker
+- Python 3.9+
+- Docker
 - A Gmail account with 2-Step Verification enabled
 - A Google App Password (16 characters)
 
@@ -55,16 +56,10 @@ pip install -r requirements.txt
 
 ### Run with Docker
 
-Navigate to the directory with the project and build the Docker image:
+Build and run the containers:
 
 ```
-docker build -t site-monitor .
-```
-
-Finally, run the container:
-
-```
-docker run --env-file .env site-monitor
+docker compose up --build
 ```
 
 ## Usage
@@ -105,4 +100,12 @@ Input a select statement:
 
 ```
 SELECT * FROM checks;
+```
+
+### Finishing up
+
+If you want to stop the Docker containers:
+
+```
+docker compose down
 ```
