@@ -52,7 +52,9 @@ If you want to use the default login credentials, copy this code into your .env 
 
 ### (Optional) Set up email alerts
 
-This step is optional if you want to receive email alerts if a website down:
+This step is optional if you want to receive email alerts if a website down.
+
+Add the following lines to your .env file:
 
 ```
 EMAIL_RECIPIENT=recipient-email@gmail.com
