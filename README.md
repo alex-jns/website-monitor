@@ -36,14 +36,14 @@ cd website-monitor
 
 ### (Optional) Set up environment
 
+This step is optional if you want to receive email alerts if a website down.
+
 This project uses a .env file to manage secrets. Create a .env file in the root directory and add the following:
 
 ```
 EMAIL_SENDER=your-email@gmail.com
 EMAIL_PASS=your-app-password-here
 ```
-
-This step is optional if you want to receive email alerts if a website down.
 
 ### Install dependencies
 
@@ -69,7 +69,7 @@ docker run --env-file .env site-monitor
 
 ## Usage
 
-Once the project is running, it will query a list of websites once per minute.
+Once the project is running, it will query a list of websites once per minute. Websites that are down (returns a bad HTTP status code, or times out after 5 seconds) it will send an email through Gmail SMTP using TLS if the environment was set up correctly. 
 
 ### Change sites to be monitored
 
@@ -91,4 +91,18 @@ The monitoring script is trigger by the crontab file:
 
 ```
 * * * * * /usr/local/bin/python3 /app/monitor.py >> /var/log/cron.log 2>&1
+```
+
+### Query the database
+
+Login to the database using Docker:
+
+```
+docker compose exec db psql -U postgres -d monitor
+```
+
+Input a select statement:
+
+```
+SELECT * FROM checks;
 ```
