@@ -1,41 +1,43 @@
-# Module that defines a SMTP client session object
+# Imports the Simple Mail Transfer Protocol (SMTP) client to send emails
 import smtplib
 
-# Class that makes it easy to set headers and content
+# Imports the class used to manage email structure like header and body
 from email.message import EmailMessage
 
+# Import operating system library
+import os
+
+# Imports the loader for .env files
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Defines a function that takes the result of a website query as an argument
 def send_alert(result):
 
-    # Defines an empty email message object
+    # Creates a new email message object
     msg = EmailMessage()
 
-    # Sets the content of the email
+    # Sets the body of the email to the results of the query (alert)
     msg.set_content(f"Site DOWN: {result['url']}\nError: {result.get('error')}")
 
-    # Defines the email subject header
+    # Sets the header of the email
     msg["Subject"] = "Website Alert"
 
-    # Sender email address
-    msg["From"] = "monitor@example.com"
+    # Sets the sender address
+    msg["From"] = os.getenv("EMAIL_SENDER")
 
-    # Recipient of the email
-    msg["To"] = "you@example.com"
+    # Sets the recipient address
+    msg["To"] = os.getenv("EMAIL_RECIPIENT")
 
-    try:
-        # 465 is the standard port for SMTP, 587 for STARTTLS
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
-            server.starttls()
-            server.login("user", "password")
-            server.send_message(msg)
-            print("Email sent successfully.")
-    except Exception as e:
-        print(f"Error sending email: {e}")
+    # Establishes a connection to the Gmail SMTP server on port 587
+    with smtplib.SMTP("smtp.gmail.com", 587) as server:
 
-result = {
-    "url": "https://google.com",
-    "status": "down",
-    "status_code": "404",
-    "latency": "5"
-}
+        # Puts SMTP connection in Transport Layer Security (TLS) to encrypt
+        server.starttls()
 
-send_alert(result)
+        # Authenticates using credentials 
+        server.login(os.getenv("EMAIL_SENDER"), os.getenv("EMAIL_PASS"))
+
+        # Sends the email
+        server.send_message(msg)
