@@ -1,6 +1,11 @@
 import psycopg2
 import os
 
+# Imports the loader for .env files
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # URL to the PostgreSQL database in Docker
 DATABASE_URL = os.getenv("DATABASE_URL")
 

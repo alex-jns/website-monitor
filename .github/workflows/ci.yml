@@ -6,6 +6,18 @@ on:
   push:
     branches: [main]
 
+env:
+  # Use default credentials for testing
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_DB: monitor
+  DATABASE_URL: postgresql://postgres:postgres@db:5432/monitor
+
+  # Use dummy values for testing
+  EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
+  EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+  EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+
 # Defines a job called build-ant-test that runs on the latest version of ubuntu
 jobs:
   build-and-test:
