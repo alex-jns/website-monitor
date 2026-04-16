@@ -1,4 +1,7 @@
+# This library is used to make HTTP requests
 import requests
+
+# This library is used to get the time
 import time
 
 # Imports the function from database.py

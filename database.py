@@ -1,4 +1,7 @@
+# PostgreSQL database adapater for Python
 import psycopg2
+
+# Built-in library that interacts with the OS
 import os
 
 # Imports the loader for .env files
@@ -29,7 +32,7 @@ def save_result(result):
     cur.execute("""
         INSERT INTO checks (url, status, status_code, latency, error)
         VALUES (%s, %s, %s, %s, %s)
-    """, (
+        """, (
 
         # URL of the website that was checked
         result["url"],
