@@ -122,25 +122,6 @@ If you want to stop the Docker containers:
 docker compose down
 ```
 
-## Troubleshooting
-
-1. Ensure that the Raspberry Pi and sensors are properly connected and configured to send data to the backend.
-
-> The backend is expecting a UDP message from port 11000. It is expecting a JSON response such as:
-
-```
-{
-  temperatureF: 72, // expecting no quotation marks around "temperatureF"
-  "temperatureC": 22,
-  "humidity": 55
-}
-```
-
-2. Check the console output and logs for any error messages or exceptions that may indicate issues with data collection, API integration, or report generation.
-3. Verify that the OpenMeteo API is accessible and that the API parameters (latitude, longitude) are correctly configured.
-4. Check for any file I/O issues when writing JSON files or generating reports, such as permission issues or insufficient disk space.
-
-
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
